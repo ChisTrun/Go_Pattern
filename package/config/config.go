@@ -21,12 +21,20 @@ type Config struct {
 
 func ReadConfig(path string) (Config, error) {
 	var cfg Config
+
+	// Thiết lập để tự động đọc biến môi trường
+	viper.AutomaticEnv()
+
+	// Đọc file cấu hình
 	viper.SetConfigFile(path)
 	if err := viper.ReadInConfig(); err != nil {
 		return cfg, err
 	}
+
+	// Thực hiện unmarshal từ cấu hình
 	if err := viper.Unmarshal(&cfg); err != nil {
 		return cfg, err
 	}
+
 	return cfg, nil
 }
