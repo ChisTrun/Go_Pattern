@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  go_pattern:
+    build:
+      dockerfile: build/dockerfile
+    ports:
+      - "8080:8080"  
+    environment:
+      - HOST=localhost
+      - PORT=8080
