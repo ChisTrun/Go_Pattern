@@ -6,6 +6,3 @@ services:
       dockerfile: build/dockerfile
     ports:
       - "8080:8080"  
-    environment:
-      - HOST=localhost
-      - PORT=8080

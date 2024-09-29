@@ -90,3 +90,18 @@ clean:
 
 build_image:
 	go build -o server ./cmd
+
+gen_node:
+	@for proto in $(PROTO_FILES); do \
+		protoc --js_out=import_style=commonjs,binary:./connect/node \
+       --grpc_out=./connect/node \
+       --plugin=protoc-gen-grpc=`which grpc_tools_node_protoc_plugin` \
+		$$proto; \
+	done
+
+gen_web:
+	@for proto in $(PROTO_FILES); do \
+		protoc --js_out=import_style=commonjs,binary:./connect/web \
+       --grpc-web_out=import_style=commonjs,mode=grpcwebtext:./connect/web \
+       $$proto; \
+	done

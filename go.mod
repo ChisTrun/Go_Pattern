@@ -1,9 +1,11 @@
 module go_pattern
 
-go 1.23.1
+go 1.21
+
+toolchain go1.22.4
 
 require (
-	entgo.io/ent v0.14.1
+	entgo.io/ent v0.14.0
 	github.com/go-sql-driver/mysql v1.8.1
 	github.com/spf13/viper v1.19.0
 	google.golang.org/grpc v1.67.0
