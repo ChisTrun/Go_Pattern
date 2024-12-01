@@ -105,3 +105,25 @@ gen_web:
        --grpc-web_out=import_style=commonjs,mode=grpcwebtext:./connect/web \
        $$proto; \
 	done
+
+gen_ts:
+	@for proto in $(PROTO_FILES); do \
+		protoc --ts_out=connect/ts \
+		--ts_opt=target=web\
+       $$proto; \
+	done
+
+gen_web2:
+	@for proto in $(PROTO_FILES); do \
+		protoc -I. $$proto\
+  		--grpc-web_out=import_style=closure,mode=grpcweb:./connect/web; \
+	done
+
+gen_proto:
+	@for proto in $(PROTO_FILES); do \
+		npx grpc_tools_node_protoc \
+		--plugin=protoc-gen-grpc="$(which grpc_tools_node_protoc_plugin)" \
+		--ts_opt=target=web\
+		--ts_out=grpc_js:./connect/proto \
+       $$proto; \
+	done
