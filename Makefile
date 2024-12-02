@@ -121,9 +121,8 @@ gen_web2:
 
 gen_proto:
 	@for proto in $(PROTO_FILES); do \
-		npx grpc_tools_node_protoc \
-		--plugin=protoc-gen-grpc="$(which grpc_tools_node_protoc_plugin)" \
-		--ts_opt=target=web\
-		--ts_out=grpc_js:./connect/proto \
+		protoc \
+		--plugin=protoc-gen-ts="$(HOME)/node_modules/.bin/protoc-gen-ts" \
+		--ts_out=grpc_js:./connect \
        $$proto; \
 	done

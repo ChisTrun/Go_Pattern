@@ -31,6 +31,11 @@ func ReadConfig(path string) (Config, error) {
 		return cfg, err
 	}
 
+	viper.BindEnv("database.host", "DATABASE_HOST")
+	viper.BindEnv("database.name", "DATABASE_NAME")
+	viper.BindEnv("database.username", "DATABASE_USERNAME")
+	viper.BindEnv("database.password", "DATABASE_PASSWORD")
+
 	// Thực hiện unmarshal từ cấu hình
 	if err := viper.Unmarshal(&cfg); err != nil {
 		return cfg, err
